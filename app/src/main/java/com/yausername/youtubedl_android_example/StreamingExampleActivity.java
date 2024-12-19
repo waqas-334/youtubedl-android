@@ -59,11 +59,8 @@ public class StreamingExampleActivity extends AppCompatActivity implements View.
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_start_streaming: {
-                startStream();
-                break;
-            }
+        if (v.getId() == R.id.btn_start_streaming) {
+            startStream();
         }
     }
 
@@ -82,11 +79,11 @@ public class StreamingExampleActivity extends AppCompatActivity implements View.
 
         pbLoading.setVisibility(View.VISIBLE);
         Disposable disposable = Observable.fromCallable(() -> {
-            YoutubeDLRequest request = new YoutubeDLRequest(url);
-            // best stream containing video+audio
-            request.addOption("-f", "best");
-            return YoutubeDL.getInstance().getInfo(request);
-        })
+                    YoutubeDLRequest request = new YoutubeDLRequest(url);
+                    // best stream containing video+audio
+                    request.addOption("-f", "best");
+                    return YoutubeDL.getInstance().getInfo(request);
+                })
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(streamInfo -> {
