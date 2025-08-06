@@ -23,6 +23,7 @@ internal class StreamProcessExtractor(
         start()
     }
 
+
     override fun run() {
         try {
             val input: Reader = InputStreamReader(stream, StandardCharsets.UTF_8)
@@ -69,7 +70,6 @@ internal class StreamProcessExtractor(
             }
         }
     }
-
     private fun processOutputLine(line: String) {
         callback?.let { it(getProgress(line), getEta(line), line) }
     }
